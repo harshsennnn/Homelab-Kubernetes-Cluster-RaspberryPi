@@ -55,3 +55,54 @@ The cluster is deployed entirely on local hardware, exposing services via LAN IP
 
 ## 📂 Repository Structure
 
+
+
+k8s-homelab/
+├── README.md
+├── docs/ # Architecture, setup guides, runbooks
+├── infrastructure/ # OS bootstrap and node preparation
+├── kubernetes/ # Cluster manifests (networking, apps, monitoring)
+├── apps/ # Sample containerized workloads
+├── ci-cd/ # GitHub Actions and deployment scripts
+└── scripts/ # Ops, troubleshooting, and failure simulation scripts
+
+
+---
+
+## 🔧 What This Project Demonstrates
+
+- Bare-metal Kubernetes cluster design and operation
+- Linux system preparation for Kubernetes nodes
+- On-prem networking challenges and solutions
+- End-to-end application delivery to Kubernetes
+- Monitoring and observability in resource-constrained environments
+- Practical incident response and recovery workflows
+- Documentation-first engineering approach
+
+---
+
+## 📈 Learning & Operational Focus
+
+This project emphasizes **doing**, not just deploying:
+
+- Node failures and recovery
+- Pod crashes and restarts
+- Resource pressure scenarios
+- Cluster maintenance (cordon, drain, upgrades)
+- Troubleshooting networking and storage issues
+
+All learnings and resolutions are documented for reproducibility.
+
+---
+
+## 🚀 Status
+
+🟢 **Active Development**  
+This homelab is continuously evolved to explore deeper Kubernetes, DevOps, and SRE concepts.
+
+---
+
+## 📜 License
+
+This project is open for learning and experimentation purposes.
+
