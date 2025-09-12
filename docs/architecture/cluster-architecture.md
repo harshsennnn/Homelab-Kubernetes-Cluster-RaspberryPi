@@ -11,6 +11,10 @@ The cluster is designed to:
 - Support application deployment, monitoring, and failure recovery
 - Avoid reliance on cloud-managed services
 
+<div align="center">
+  <img src="./Architecture.png" alt="K8s homelab Overview">
+</div>
+
 ---
 
 ## Physical Topology

@@ -51,7 +51,17 @@ This topology mirrors a minimal but realistic production-style Kubernetes setup 
 
 The cluster is deployed entirely on local hardware, exposing services via LAN IPs and ingress routing.
 
+<div align="center">
+  <img src="./docs/architecture/Architecture.png" alt="Architecture overview diagram">
+</div>
+
 ---
+
+## Traffic Flow
+
+<div align="center">
+  <img src="./kubernetes/networking/Trafficflow.png" alt="Traffic Flow diagram">
+</div>
 
 ## 📂 Repository Structure
 
