@@ -1,0 +1,42 @@
+# Kubernetes cluster initialization config
+# Target: Raspberry Pi (ARM64), containerd, bare-metal
+
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: InitConfiguration
+nodeRegistration:
+  name: k8s-cp-1
+  criSocket: unix:///run/containerd/containerd.sock
+  kubeletExtraArgs:
+    cgroup-driver: systemd
+
+---
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: ClusterConfiguration
+kubernetesVersion: v1.29.0
+clusterName: raspberrypi-homelab
+
+controlPlaneEndpoint: "k8s-cp-1:6443"
+
+networking:
+  podSubnet: "192.168.0.0/16"
+  serviceSubnet: "10.96.0.0/12"
+  dnsDomain: "cluster.local"
+
+apiServer:
+  timeoutForControlPlane: 4m0s
+  extraArgs:
+    authorization-mode: Node,RBAC
+
+controllerManager:
+  extraArgs:
+    bind-address: 0.0.0.0
+
+scheduler:
+  extraArgs:
+    bind-address: 0.0.0.0
+
+---
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+cgroupDriver: systemd
+failSwapOn: true
