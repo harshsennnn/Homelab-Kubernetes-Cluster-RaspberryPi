@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: metallb-system
+  labels:
+    app.kubernetes.io/name: metallb
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metallb-controller
+  namespace: metallb-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metallb-controller
+  template:
+    metadata:
+      labels:
+        app: metallb-controller
+    spec:
+      containers:
+      - name: controller
+        image: quay.io/metallb/controller:v0.13.12
+        args:
+        - controller
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: metallb-speaker
+  namespace: metallb-system
+spec:
+  selector:
+    matchLabels:
+      app: metallb-speaker
+  template:
+    metadata:
+      labels:
+        app: metallb-speaker
+    spec:
+      hostNetwork: true
+      containers:
+      - name: speaker
+        image: quay.io/metallb/speaker:v0.13.12
+        args:
+        - speaker
