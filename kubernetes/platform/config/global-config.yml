@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: global-config
+  namespace: microservices-app
+data:
+  APP_ENV: "homelab"
+  LOG_LEVEL: "info"
+
+  # Shared service URLs (cluster-internal)
+  AUTH_SERVICE_URL: "http://auth-service"
+  USER_SERVICE_URL: "http://user-service"
+  PRODUCT_SERVICE_URL: "http://product-service"
+  ORDER_SERVICE_URL: "http://order-service"
