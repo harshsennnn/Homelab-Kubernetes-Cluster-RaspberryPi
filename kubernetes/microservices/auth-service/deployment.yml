@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  namespace: microservices-app
+  labels:
+    app: auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+    spec:
+      containers:
+      - name: auth-service
+        # TODO: replace with real auth-service image once built and pushed
+        image: nginx:stable-alpine
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
