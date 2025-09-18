@@ -1,0 +1,46 @@
+name: Deploy to Homelab Kubernetes
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - kubernetes/**
+      - ci-cd/**
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v4
+      with:
+        version: v1.29.0
+
+    - name: Configure kubeconfig
+      run: |
+        mkdir -p $HOME/.kube
+        echo "${{ secrets.KUBECONFIG }}" | base64 -d > $HOME/.kube/config
+        chmod 600 $HOME/.kube/config
+
+    - name: Verify cluster access
+      run: kubectl get nodes
+
+    - name: Apply namespaces
+      run: kubectl apply -f kubernetes/namespaces/
+
+    - name: Apply platform components
+      run: |
+        kubectl apply -f kubernetes/networking/
+        kubectl apply -f kubernetes/platform/
+
+    - name: Deploy microservices
+      run: kubectl apply -f kubernetes/microservices/
+
+    - name: Deploy monitoring
+      run: kubectl apply -f kubernetes/monitoring/
