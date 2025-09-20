@@ -1,2 +1,2 @@
 localstruct.txt
-monitoring/*
+kubernetes/monitoring/prometheus/*.yml
